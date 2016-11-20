@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Payment.html</title>
+
+    <link rel="stylesheet" type="text/css" href="StyleSheet.css" />
+
+    <script>
+        function btnCompute_Click() {
+            var v = document.getElementById("spnNumericVariables");
+            var initial, numberOfPeriods, interestRate, initialNum, numberOfPeriodsNum, interestRateNum,
+                numberOfPeriodsNum2, interestRateNum2, result;
+            initial = document.getElementById("txtInitial");
+            numberOfPeriods = document.getElementById("txtNumberOfPeriods");
+            interestRate = document.getElementById("txtInterestRate");
+            initialNum = parseFloat(initial.value);
+            numberOfPeriodsNum = parseFloat(numberOfPeriods.value);
+            interestRateNum = parseFloat(interestRate.value);
+            numberOfPeriodsNum2 = (numberOfPeriodsNum * 12 * -1);
+            interestRateNum2 = ((interestRateNum / 100) / 12);
+            result = (interestRateNum2 * initialNum) / (1 - (Math.pow((1 + interestRateNum2), numberOfPeriodsNum2)));
+            
+
+            var periods = (numberOfPeriodsNum * 12)
+            var body = document.getElementsByTagName('body')[0];
+            var tbl = document.createElement('table');
+            tbl.style.width = '25%';
+            tbl.setAttribute('border', '1');
+            var tbdy = document.createElement('tbody');
+
+            var header = tbl.createTHead();
+            var headRow = header.insertRow(0);
+            var begBal = headRow.insertCell(0);
+            begBal.innerHTML = "<b>Beg. Balance</b>";
+            var pay = headRow.insertCell(1);
+            pay.innerHTML = "<b>Payment</b>";
+            var int = headRow.insertCell(2);
+            int.innerHTML = "<b>Interest</b>";
+            var prin = headRow.insertCell(3);
+            prin.innerHTML = "<b>Principal</b>";
+            var bal = headRow.insertCell(4);
+            bal.innerHTML = "<b>Balance</b>";
+            var per = headRow.insertCell(5);
+            per.innerHTML = "<b>Period</b>";
+                        
+            for (var rows = 1; rows < (periods + 1); rows++) {
+                var tr = document.createElement('tr');
+                        var td = document.createElement('td');
+                        td.appendChild(document.createTextNode(initialNum))
+                        tr.appendChild(td)
+                        var td1 = document.createElement('td');
+                        td1.appendChild(document.createTextNode(result.toFixed(2)))
+                        tr.appendChild(td1)
+                        var td2 = document.createElement('td');
+                        td2.appendChild(document.createTextNode((initialNum * interestRateNum2).toFixed(2)))
+                        tr.appendChild(td2)
+                        var principle = result - (initialNum * interestRateNum2)
+                        var td3 = document.createElement('td');
+                        td3.appendChild(document.createTextNode(principle.toFixed(2)))
+                        tr.appendChild(td3)
+                        var balance = initialNum - principle
+                        if (balance < 0) balance = 0
+                        var td4 = document.createElement('td');                     
+                        td4.appendChild(document.createTextNode(balance.toFixed(2)))
+                        tr.appendChild(td4)
+                        var td5 = document.createElement('td');
+                        td5.appendChild(document.createTextNode(rows))
+                        tr.appendChild(td5)
+
+
+                        tbdy.appendChild(tr);
+                        tbl.appendChild(tbdy);
+                        body.appendChild(tbl)
+
+                        initialNum = balance.toFixed(2)
+
+            }
+
+            }
+            
+           
+   </script>
+      
+</head>
+<body>
+    <h1>Payment Page</h1>
+    <fieldset>
+        <legend>Enter Loan Information</legend>
+        <table>
+            <tr>
+            <tr>
+                <td>Initial Loan Amount:</td>
+                <td><input type="number" id="txtInitial" /></td>
+            </tr>
+            <tr>
+                <td>Number of Periods (Years):</td>
+                <td><input type="number" id="txtNumberOfPeriods" /></td>
+            </tr>
+            <tr>
+                <td>Interest Rate (Years):</td>
+                <td><input type="number" id="txtInterestRate" /></td>
+            </tr>
+        </table>
+    </fieldset>
+
+    <br />
+ 
+        <button id="btnCompute" type="button"
+                onclick="btnCompute_Click()">
+            Create Loan Amortization Schedule
+        </button>
+     
+
+    <br />
+    <br />
+    
+</body>
+</html>
