@@ -1,0 +1,59 @@
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Payment.aspx.cs" Inherits="Payment" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+    <h1>Payment Calculator Form</h1>
+        <asp:Button ID="btnPDefault" runat="server" Text="Welcome Form" OnClick="btnPayment_Click" />
+        <asp:Button ID="btnPFuture" runat="server" Text="Future Value Form" OnClick="btnFuture_Click" />
+
+        <h3>Input the following:</h3>
+        <table>
+            <tr>
+                <td>Interest Rate:</td>
+                <td><asp:DropDownList ID="ddlInterest" runat="server"></asp:DropDownList></td>
+            </tr>
+            <tr>
+                <td>Term:</td>
+                <td><asp:TextBox ID="txtTerm" runat="server" OnTextChanged="txtTerm_TextChanged"></asp:TextBox>
+                    <asp:RangeValidator ID="rvTerm" runat="server"
+                        ErrorMessage="Enter a number between 1 and 50."
+                        ControlToValidate="txtTerm" MinimumValue="1" MaximumValue="50"
+                        Type="Double"></asp:RangeValidator></td>
+            </tr>
+            <tr>
+                <td>Loan Amount:</td>
+                <td><asp:TextBox ID="txtLoan" runat="server"></asp:TextBox>
+                    <asp:RangeValidator ID="rvLoan" runat="server"
+                        ErrorMessage="Enter a number between 10,000 and 2 million."
+                        ControlToValidate="txtLoan" MinimumValue="10000" MaximumValue="2000000"
+                        Type="Double"></asp:RangeValidator>
+                </td>
+            </tr>
+            <tr>
+                <td><asp:Button ID="btnCalculate" runat="server" Text="Calculate" OnClick="btnCalculate_Click" /></td>
+                <td><asp:Label ID="lblOutput" runat="server" Text=""></asp:Label></td>
+            </tr>
+        </table>
+        <br />
+        <asp:Table ID="tblOutput" runat="server" Width="100%"> 
+            <asp:TableRow>
+                <asp:TableCell><b>Period</b></asp:TableCell>
+                <asp:TableCell><b>Beginning Balance</b></asp:TableCell>
+                <asp:TableCell><b>Payment</b></asp:TableCell>
+                <asp:TableCell><b>Interest</b></asp:TableCell>
+                <asp:TableCell><b>Principal</b></asp:TableCell>
+                <asp:TableCell><b>Balance</b></asp:TableCell>
+            </asp:TableRow>
+            </asp:Table> 
+        
+    </div>
+    </form>
+</body>
+</html>
